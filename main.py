@@ -41,6 +41,9 @@ def get_news(link):
 
     soup = BeautifulSoup(response, 'html.parser')
 
+    # title retrieval
+    title = soup.findAll("h1")[0].get_text()
+
     # text retrieval
     news = soup.findAll("div", {"class": "rich-text font-text-body"})
     text = ""
@@ -69,7 +72,7 @@ def get_news(link):
         img = i.findAll("img")[0]['src']
         img_gal.append(img)
 
-    result = {'text': text, 'images': img, 'videos': vdo, 'img_gallery': img_gal}
+    result = {'title': title, 'text': text, 'images': img, 'videos': vdo, 'img_gallery': img_gal}
 
     return result
 
